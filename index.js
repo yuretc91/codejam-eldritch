@@ -1,81 +1,3 @@
-// const ancientsData = [
-//     {
-//       id: 'azathoth',
-//       name: 'azathoth',
-//       firstStage: {
-//         greenCards: 1,
-//         blueCards: 1,
-//         brownCards: 2,
-//       },
-//       secondStage: {
-//         greenCards: 2,
-//         blueCards: 1,
-//         brownCards: 3,
-//       },
-//       thirdStage: {
-//         greenCards: 2,
-//         blueCards: 0,
-//         brownCards: 4,
-//       },
-//     },
-//     {
-//       id: 'cthulhu',
-//       name: 'cthulhu',
-//       firstStage: {
-//         greenCards: 0,
-//         blueCards: 2,
-//         brownCards: 2,
-//       },
-//       secondStage: {
-//         greenCards: 1,
-//         blueCards: 0,
-//         brownCards: 3,
-//       },
-//       thirdStage: {
-//         greenCards: 3,
-//         blueCards: 0,
-//         brownCards: 4,
-//       },
-//     },
-//     {
-//       id: 'iogSothoth',
-//       name: 'iogSothoth',
-//       firstStage: {
-//         greenCards: 0,
-//         blueCards: 1,
-//         brownCards: 2,
-//       },
-//       secondStage: {
-//         greenCards: 2,
-//         blueCards: 1,
-//         brownCards: 3,
-//       },
-//       thirdStage: {
-//         greenCards: 3,
-//         blueCards: 0,
-//         brownCards: 4,
-//       },
-//     },
-//     {
-//       id: 'shubNiggurath',
-//       name: 'shubNiggurath',
-//       firstStage: {
-//         greenCards: 1,
-//         blueCards: 1,
-//         brownCards: 2,
-//       },
-//       secondStage: {
-//         greenCards: 3,
-//         blueCards: 1,
-//         brownCards: 2,
-//       },
-//       thirdStage: {
-//         greenCards: 2,
-//         blueCards: 0,
-//         brownCards: 4,
-//       },
-//     },
-//   ]
 const ancientsData = {
     azathoth: {
       firstStage: {
@@ -463,24 +385,74 @@ const ancientsData = {
   let currentDifficults;
   let ancientsCard = document.querySelectorAll('.ancientsCard');
   let startBtn = document.querySelector('.start');
+  let stage1Green = document.querySelector('.stage1Green');
+  let stage1Brown = document.querySelector('.stage1Brown');
+  let stage1Blue = document.querySelector('.stage1Blue');
+  let stage2Green = document.querySelector('.stage2Green');
+  let stage2Brown = document.querySelector('.stage2Brown');
+  let stage2Blue = document.querySelector('.stage2Blue');
+  let stage3Green = document.querySelector('.stage3Green');
+  let stage3Brown = document.querySelector('.stage3Brown');
+  let stage3Blue = document.querySelector('.stage3Blue');
+  let mythicCardBackground = document.querySelector('.mythicCardBackground');
+  let currentCard = document.querySelector('.currentCard');
+  let greenCards = [];
+  let brownCards = [];
+  let blueCards = [];
+  function getRandomIntInclusive(max) {
+    max = Math.floor(max);
+    return Math.floor(Math.random() * max);
+  }
 Array.from(ancientsCard).forEach(function(button){
     button.addEventListener('click', function(e) {
+        greenCount = 0
+        brownCount = 0
+        blueCount = 0
+        Array.from(ancientsCard).forEach(function(thisAncientCard){thisAncientCard.classList.remove('ancientsCardActive')})
         this.classList.add('ancientsCardActive')
         console.log(this.id);
-        currentAncientCard = ancientsData[this.id]
+        currentAncientCard = ancientsData[this.id];
         console.log(currentAncientCard);
+        for(let key in currentAncientCard){
+            greenCount += currentAncientCard[key]['greenCards']
+            brownCount += currentAncientCard[key]['brownCards']
+            blueCount += currentAncientCard[key]['blueCards']
+        }
     })
 });
 let difficults = document.querySelectorAll('.difficulty');
 Array.from(difficults).forEach(function(button){
     button.addEventListener('click', function(e) {
+        Array.from(difficults).forEach(function(thisDifficultStage){thisDifficultStage.classList.remove('difficultyActive')})
         this.classList.add('difficultyActive')
         console.log(this.innerHTML);
         currentDifficults = this.innerHTML;
     })
 });
 startBtn.addEventListener('click', function(e) {
+    stage1Green.textContent = currentAncientCard['firstStage']['greenCards']
+    stage1Brown.textContent = currentAncientCard['firstStage']['brownCards']
+    stage1Blue.textContent = currentAncientCard['firstStage']['blueCards']
+    stage2Green.textContent = currentAncientCard['secondStage']['greenCards']
+    stage2Brown.textContent = currentAncientCard['secondStage']['brownCards']
+    stage2Blue.textContent = currentAncientCard['secondStage']['blueCards']
+    stage3Green.textContent = currentAncientCard['thirdStage']['greenCards']
+    stage3Brown.textContent = currentAncientCard['thirdStage']['brownCards']
+    stage3Blue.textContent = currentAncientCard['thirdStage']['blueCards']
     if(currentDifficults == 'Средний'){
-        console.log('OK')
+        for(let i = 0;i < greenCount; i++){
+            greenCards.push(greenCardsData[getRandomIntInclusive(greenCardsData.length)])
+        }
+        for(let i = 0;i < brownCount; i++){
+            brownCards.push(brownCardsData[getRandomIntInclusive(brownCardsData.length)])
+        }
+        for(let i = 0;i < blueCount; i++){
+            blueCards.push(blueCardsData[getRandomIntInclusive(blueCardsData.length)])
+        }
     }
+    mythicCardBackground.classList.remove('mythicCardBackgroundInactive')
+    
+    console.log(greenCards)
+    console.log(brownCards)
+    console.log(blueCards)
 });
