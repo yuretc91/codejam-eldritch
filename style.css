@@ -33,6 +33,16 @@ body{
 #currentCard{
     width: 500px;
 }
+.mythicCardBackgroundInactive, .currentCardInactive{
+    display: none;
+}
+.mythicCardBackground, .currentCard{
+    text-align: center;
+    margin: 20px auto;
+}
+.mythicCardBackground img{
+    width: 150px;
+}
 #options{
     color: white;
     font-size: 32px;
