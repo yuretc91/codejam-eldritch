@@ -380,8 +380,8 @@ const ancientsData = {
       color:'green'
     },
   ]
+  
   let currentAncientCard;
-  let greenCount, brownCount, blueCount;
   let currentDifficults;
   let ancientsCard = document.querySelectorAll('.ancientsCard');
   let startBtn = document.querySelector('.start');
@@ -396,72 +396,84 @@ const ancientsData = {
   let stage3Blue = document.querySelector('.stage3Blue');
   let mythicCardBackground = document.querySelector('.mythicCardBackground');
   let currentCard = document.querySelector('.currentCard');
-  let greenCards = [];
-  let brownCards = [];
-  let blueCards = [];
-  let stage1, stage2, stage3, deletedCard
-  function getRandomIntInclusive(max) {
-    max = Math.floor(max);
-    return Math.floor(Math.random() * max);
-  }
-  function getCard(ancientData, greenCardsArr, brownCardsArr, blueCardsArr){
-    stage1 = []
-    stage2 = []
-    stage3 = []
-    if(ancientData['firstStage']['greenCards'] > 0){
-      for(let i = 0;i < ancientData['firstStage']['greenCards'];i++){
-        stage1.push(greenCardsArr.pop())
-      }
-    }
-    if(ancientData['firstStage']['brownCards'] > 0){
-      for(let i = 0;i < ancientData['firstStage']['brownCards'];i++){
-        stage1.push(brownCardsArr.pop())
-      }
-    }
-    if(ancientData['firstStage']['blueCards'] > 0){
-      for(let i = 0;i < ancientData['firstStage']['blueCards'];i++){
-        stage1.push(blueCardsArr.pop())
-      }
-    }
-    if(ancientData['secondStage']['greenCards'] > 0){
-      for(let i = 0;i < ancientData['secondStage']['greenCards'];i++){
-        stage2.push(greenCardsArr.pop())
-      }
-    }
-    if(ancientData['secondStage']['brownCards'] > 0){
-      for(let i = 0;i < ancientData['secondStage']['brownCards'];i++){
-        stage2.push(brownCardsArr.pop())
-      }
-    }
-    if(ancientData['secondStage']['blueCards'] > 0){
-      for(let i = 0;i < ancientData['secondStage']['blueCards'];i++){
-        stage2.push(blueCardsArr.pop())
-      }
-    }
-    if(ancientData['thirdStage']['greenCards'] > 0){
-      for(let i = 0;i < ancientData['thirdStage']['greenCards'];i++){
-        stage3.push(greenCardsArr.pop())
-      }
-    }
-    if(ancientData['thirdStage']['brownCards'] > 0){
-      for(let i = 0;i < ancientData['thirdStage']['brownCards'];i++){
-        stage3.push(brownCardsArr.pop())
-      }
-    }
-    if(ancientData['thirdStage']['blueCards'] > 0){
-      for(let i = 0;i < ancientData['thirdStage']['blueCards'];i++){
-        stage3.push(blueCardsArr.pop())
-      }
-    }
-    stage1.sort(() => Math.random() - 0.5)
-    stage2.sort(() => Math.random() - 0.5)
-    stage3.sort(() => Math.random() - 0.5)
-  }
+  let difficults = document.querySelectorAll('.difficulty');
+  
 Array.from(ancientsCard).forEach(function(button){
     button.addEventListener('click', function() {
-        greenCount = 0
-        brownCount = 0
-        blueCount = 0
+        stage1Green.textContent = '0'
+        stage1Brown.textContent = '0'
+        stage1Blue.textContent = '0'
+        stage2Green.textContent = '0'
+        stage2Brown.textContent = '0'
+        stage2Blue.textContent = '0'
+        stage3Green.textContent = '0'
+        stage3Brown.textContent = '0'
+        stage3Blue.textContent = '0'
+        let greenCardsDataDiff = [], brownCardsDataDiff = [], blueCardsDataDiff = []
+        let greenCards = [];
+        let brownCards = [];
+        let blueCards = [];
+        let stage1, stage2, stage3, deletedCard
+        let greenCount = 0
+        let brownCount = 0
+        let blueCount = 0
+        function getRandomIntInclusive(max) {
+          max = Math.floor(max);
+          return Math.floor(Math.random() * max);
+        }
+        function getCard(ancientData, greenCardsArr, brownCardsArr, blueCardsArr){
+          stage1 = []
+          stage2 = []
+          stage3 = []
+          if(ancientData['firstStage']['greenCards'] > 0){
+            for(let i = 0;i < ancientData['firstStage']['greenCards'];i++){
+              stage1.push(greenCardsArr.pop())
+            }
+          }
+          if(ancientData['firstStage']['brownCards'] > 0){
+            for(let i = 0;i < ancientData['firstStage']['brownCards'];i++){
+              stage1.push(brownCardsArr.pop())
+            }
+          }
+          if(ancientData['firstStage']['blueCards'] > 0){
+            for(let i = 0;i < ancientData['firstStage']['blueCards'];i++){
+              stage1.push(blueCardsArr.pop())
+            }
+          }
+          if(ancientData['secondStage']['greenCards'] > 0){
+            for(let i = 0;i < ancientData['secondStage']['greenCards'];i++){
+              stage2.push(greenCardsArr.pop())
+            }
+          }
+          if(ancientData['secondStage']['brownCards'] > 0){
+            for(let i = 0;i < ancientData['secondStage']['brownCards'];i++){
+              stage2.push(brownCardsArr.pop())
+            }
+          }
+          if(ancientData['secondStage']['blueCards'] > 0){
+            for(let i = 0;i < ancientData['secondStage']['blueCards'];i++){
+              stage2.push(blueCardsArr.pop())
+            }
+          }
+          if(ancientData['thirdStage']['greenCards'] > 0){
+            for(let i = 0;i < ancientData['thirdStage']['greenCards'];i++){
+              stage3.push(greenCardsArr.pop())
+            }
+          }
+          if(ancientData['thirdStage']['brownCards'] > 0){
+            for(let i = 0;i < ancientData['thirdStage']['brownCards'];i++){
+              stage3.push(brownCardsArr.pop())
+            }
+          }
+          if(ancientData['thirdStage']['blueCards'] > 0){
+            for(let i = 0;i < ancientData['thirdStage']['blueCards'];i++){
+              stage3.push(blueCardsArr.pop())
+            }
+          }
+          stage1.sort(() => Math.random() - 0.5)
+          stage2.sort(() => Math.random() - 0.5)
+          stage3.sort(() => Math.random() - 0.5)
+        }
         Array.from(ancientsCard).forEach(function(thisAncientCard){thisAncientCard.classList.remove('ancientsCardActive')})
         this.classList.add('ancientsCardActive')
         currentAncientCard = ancientsData[this.id];
@@ -470,80 +482,119 @@ Array.from(ancientsCard).forEach(function(button){
             brownCount += currentAncientCard[key]['brownCards']
             blueCount += currentAncientCard[key]['blueCards']
         }
+
+        Array.from(difficults).forEach(function(button){
+          button.addEventListener('click', function() {
+              Array.from(difficults).forEach(function(thisDifficultStage){thisDifficultStage.classList.remove('difficultyActive')})
+              this.classList.add('difficultyActive')
+              currentDifficults = this.innerHTML;
+          })
+      });
+      startBtn.addEventListener('click', function() {
+          stage1Green.textContent = currentAncientCard['firstStage']['greenCards']
+          stage1Brown.textContent = currentAncientCard['firstStage']['brownCards']
+          stage1Blue.textContent = currentAncientCard['firstStage']['blueCards']
+          stage2Green.textContent = currentAncientCard['secondStage']['greenCards']
+          stage2Brown.textContent = currentAncientCard['secondStage']['brownCards']
+          stage2Blue.textContent = currentAncientCard['secondStage']['blueCards']
+          stage3Green.textContent = currentAncientCard['thirdStage']['greenCards']
+          stage3Brown.textContent = currentAncientCard['thirdStage']['brownCards']
+          stage3Blue.textContent = currentAncientCard['thirdStage']['blueCards']
+          currentCard.classList.add('currentCardInactive')
+          if(currentDifficults == 'Легкий'){
+            Array.from(greenCardsData).forEach(function(thisGreenCard){
+              if(thisGreenCard['difficulty'] != 'hard'){
+                greenCardsDataDiff.push(thisGreenCard)
+              }
+            })
+            Array.from(brownCardsData).forEach(function(thisBrownCard){
+              if(thisBrownCard['difficulty'] != 'hard'){
+                brownCardsDataDiff.push(thisBrownCard)
+              }
+            })
+            Array.from(blueCardsData).forEach(function(thisBlueCard){
+              if(thisBlueCard['difficulty'] != 'hard'){
+                blueCardsDataDiff.push(thisBlueCard)
+              }
+            })
+          }else if(currentDifficults == 'Высокий'){
+            Array.from(greenCardsData).forEach(function(thisGreenCard){
+              if(thisGreenCard['difficulty'] != 'easy'){
+                greenCardsDataDiff.push(thisGreenCard)
+              }
+            })
+            Array.from(brownCardsData).forEach(function(thisBrownCard){
+              if(thisBrownCard['difficulty'] != 'easy'){
+                brownCardsDataDiff.push(thisBrownCard)
+              }
+            })
+            Array.from(blueCardsData).forEach(function(thisBlueCard){
+              if(thisBlueCard['difficulty'] != 'easy'){
+                blueCardsDataDiff.push(thisBlueCard)
+              }
+            })
+          }else if(currentDifficults == 'Средний'){
+            greenCardsDataDiff = greenCardsData
+            brownCardsDataDiff = brownCardsData
+            blueCardsDataDiff = blueCardsData
+          }else{
+            greenCardsDataDiff = greenCardsData
+            brownCardsDataDiff = brownCardsData
+            blueCardsDataDiff = blueCardsData
+            alert('Данный уровень сложности не настроен. Сборка колоды будет производиться по уровню "Средний"')
+          }
+      
+      
+          for(let i = 0;i < greenCount; i++){
+            greenCards.push(greenCardsDataDiff.splice(getRandomIntInclusive(greenCardsDataDiff.length - i), 1)[0])
+        }
+        for(let i = 0;i < brownCount; i++){
+            brownCards.push(brownCardsDataDiff.splice(getRandomIntInclusive(brownCardsDataDiff.length - i), 1)[0])
+        }
+        for(let i = 0;i < blueCount; i++){
+            blueCards.push(blueCardsDataDiff.splice(getRandomIntInclusive(blueCardsDataDiff.length - i), 1)[0])
+        }
+      
+          mythicCardBackground.classList.remove('mythicCardBackgroundInactive')
+          getCard(currentAncientCard, greenCards, brownCards, blueCards)
+          
+      })
+
+      mythicCardBackground.addEventListener('click', function(){
+        currentCard.classList.remove('currentCardInactive')
+        if(stage1.length > 0){
+          deletedCard = stage1.pop()
+          if(deletedCard['color'] == 'green'){
+            stage1Green.textContent = Number(stage1Green.textContent) - 1
+          }else if (deletedCard['color'] == 'brown'){
+            stage1Brown.textContent = Number(stage1Brown.textContent) - 1
+          }else if(deletedCard['color'] == 'blue'){
+            stage1Blue.textContent = Number(stage1Blue.textContent) - 1
+          }
+        }else if(stage2.length > 0){
+          deletedCard = stage2.pop()
+          if(deletedCard['color'] == 'green'){
+            stage2Green.textContent = Number(stage2Green.textContent) - 1
+          }else if (deletedCard['color'] == 'brown'){
+            stage2Brown.textContent = Number(stage2Brown.textContent) - 1
+          }else if(deletedCard['color'] == 'blue'){
+            stage2Blue.textContent = Number(stage2Blue.textContent) - 1
+          }
+        }else if(stage3.length > 0){
+          deletedCard = stage3.pop()
+          if(deletedCard['color'] == 'green'){
+            stage3Green.textContent = Number(stage3Green.textContent) - 1
+          }else if (deletedCard['color'] == 'brown'){
+            stage3Brown.textContent = Number(stage3Brown.textContent) - 1
+          }else if(deletedCard['color'] == 'blue'){
+            stage3Blue.textContent = Number(stage3Blue.textContent) - 1
+          }
+          if(stage3.length == 0){
+            mythicCardBackground.classList.add('mythicCardBackgroundInactive')
+          }
+        }
+        currentCard.innerHTML = `<img src="${deletedCard['cardFace']}" alt="currentCard" class="currentCardImg">`
+      })
+
     })
-});
-let difficults = document.querySelectorAll('.difficulty');
-Array.from(difficults).forEach(function(button){
-    button.addEventListener('click', function(e) {
-        Array.from(difficults).forEach(function(thisDifficultStage){thisDifficultStage.classList.remove('difficultyActive')})
-        this.classList.add('difficultyActive')
-        currentDifficults = this.innerHTML;
-    })
-});
-startBtn.addEventListener('click', function() {
-    stage1Green.textContent = currentAncientCard['firstStage']['greenCards']
-    stage1Brown.textContent = currentAncientCard['firstStage']['brownCards']
-    stage1Blue.textContent = currentAncientCard['firstStage']['blueCards']
-    stage2Green.textContent = currentAncientCard['secondStage']['greenCards']
-    stage2Brown.textContent = currentAncientCard['secondStage']['brownCards']
-    stage2Blue.textContent = currentAncientCard['secondStage']['blueCards']
-    stage3Green.textContent = currentAncientCard['thirdStage']['greenCards']
-    stage3Brown.textContent = currentAncientCard['thirdStage']['brownCards']
-    stage3Blue.textContent = currentAncientCard['thirdStage']['blueCards']
-
-
-
-    for(let i = 0;i < greenCount; i++){
-      greenCards.push(greenCardsData.splice(getRandomIntInclusive(greenCardsData.length - i), 1)[0])
-  }
-  for(let i = 0;i < brownCount; i++){
-      brownCards.push(brownCardsData.splice(getRandomIntInclusive(brownCardsData.length - i), 1)[0])
-  }
-  for(let i = 0;i < blueCount; i++){
-      blueCards.push(blueCardsData.splice(getRandomIntInclusive(blueCardsData.length - i), 1)[0])
-  }
-
-
-
-    // if(currentDifficults == 'Средний'){
-        
-    // }
-    
-    mythicCardBackground.classList.remove('mythicCardBackgroundInactive')
-    getCard(currentAncientCard, greenCards, brownCards, blueCards)
-    mythicCardBackground.addEventListener('click', function(){
-      currentCard.classList.remove('currentCardInactive')
-      if(stage1.length > 0){
-        deletedCard = stage1.pop()
-        if(deletedCard['color'] == 'green'){
-          stage1Green.textContent = Number(stage1Green.textContent) - 1
-        }else if (deletedCard['color'] == 'brown'){
-          stage1Brown.textContent = Number(stage1Brown.textContent) - 1
-        }else if(deletedCard['color'] == 'blue'){
-          stage1Blue.textContent = Number(stage1Blue.textContent) - 1
-        }
-      }else if(stage2.length > 0){
-        deletedCard = stage2.pop()
-        if(deletedCard['color'] == 'green'){
-          stage2Green.textContent = Number(stage2Green.textContent) - 1
-        }else if (deletedCard['color'] == 'brown'){
-          stage2Brown.textContent = Number(stage2Brown.textContent) - 1
-        }else if(deletedCard['color'] == 'blue'){
-          stage2Blue.textContent = Number(stage2Blue.textContent) - 1
-        }
-      }else if(stage3.length > 0){
-        deletedCard = stage3.pop()
-        if(deletedCard['color'] == 'green'){
-          stage3Green.textContent = Number(stage3Green.textContent) - 1
-        }else if (deletedCard['color'] == 'brown'){
-          stage3Brown.textContent = Number(stage3Brown.textContent) - 1
-        }else if(deletedCard['color'] == 'blue'){
-          stage3Blue.textContent = Number(stage3Blue.textContent) - 1
-        }
-        if(stage3.length == 0){
-          mythicCardBackground.classList.add('mythicCardBackgroundInactive')
-        }
-      }
-      currentCard.innerHTML = `<img src="${deletedCard['cardFace']}" alt="currentCard" class="currentCardImg">`
-    })
-});
+})
